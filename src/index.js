@@ -23,6 +23,24 @@ const onClickAdd = () => {
   completeButton.addEventListener("click", () => {
     // 押された完了ボタンの親タグ(li)を未完了リストから削除
     deleteFromIncompleteList(completeButton.closest("li"));
+    // 完了リストに追加する要素
+    const addTarget = completeButton.closest("li");
+    // TODO内容テキストを取得
+    const Text = addTarget.firstElementChild.firstElementChild.innerText;
+    // div以下を初期化
+    addTarget.firstElementChild.textContent = null;
+    // pタグ生成
+    const p = document.createElement("p");
+    p.className = "input-row";
+    p.innerText = Text;
+    // buttonタグ生成
+    const backButton = document.createElement("button");
+    backButton.innerText = "戻す";
+    // liタグの子要素に各要素を設定
+    addTarget.firstElementChild.appendChild(p);
+    addTarget.firstElementChild.appendChild(backButton);
+    // 完了リストに追加
+    document.getElementById("complete-list").appendChild(addTarget);
   });
 
   // button(削除)タグ生成
